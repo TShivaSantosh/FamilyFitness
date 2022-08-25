@@ -1,0 +1,7 @@
+{
+  "name": "FamilyFitness",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
