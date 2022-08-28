@@ -14,6 +14,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
+  },
+  {
+    path: 'fitness-details',
+    loadChildren: () => import('./fitness-details/fitness-details.module').then( m => m.FitnessDetailsPageModule)
   }
 ];
 @NgModule({

@@ -5,13 +5,18 @@ import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { FitnessHomeModule } from '../fitness-home/fitness-home.module';
+
+
+
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab2PageRoutingModule
+    Tab2PageRoutingModule,
+    FitnessHomeModule
   ],
   declarations: [Tab2Page]
 })

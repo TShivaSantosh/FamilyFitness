@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { Health } from '@awesome-cordova-plugins/health/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
