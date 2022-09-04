@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LinkedTrackersComponent } from './linked-trackers.component';
+import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
 
+import { LinkedTrackersPageRoutingModule } from './linked-trackers-routing.module';
 
+import { LinkedTrackersPage } from './linked-trackers.page';
+import { ManageTrackersModule } from '../manage-trackers/manage-trackers.module';
 
 @NgModule({
-  declarations: [LinkedTrackersComponent],
   imports: [
+    CommonModule,
+    FormsModule,
     IonicModule,
-    CommonModule
+    LinkedTrackersPageRoutingModule,
+    ManageTrackersModule
   ],
-  exports: [LinkedTrackersComponent]
+  declarations: [LinkedTrackersPage]
 })
-export class LinkedTrackersModule { }
+export class LinkedTrackersPageModule {}

@@ -6,7 +6,7 @@ import { Tab1Page } from './tab1.page';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { AvailableTrackersModule } from '../available-trackers/available-trackers.module';
-import { LinkedTrackersModule } from '../linked-trackers/linked-trackers.module';
+import { ManageTrackersModule } from '../manage-trackers/manage-trackers.module';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { LinkedTrackersModule } from '../linked-trackers/linked-trackers.module'
     FormsModule,
     Tab1PageRoutingModule,
     AvailableTrackersModule,
-    LinkedTrackersModule
+    ManageTrackersModule
   ],
   declarations: [Tab1Page]
 })

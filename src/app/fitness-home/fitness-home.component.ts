@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fitnesshome',
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FitnessHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
 
-  goToFitnessDetails() {}
+  goToLinkedTrackers() {
+    this.router.navigate(['app/myfamily/shiva/linkedtrackers'])
+  }
 
 }

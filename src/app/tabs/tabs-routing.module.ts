@@ -8,12 +8,28 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'trackers',
+        path: 'mytrackers',
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+      },
+      {
+        path: 'mytrackers/:trackerid/trackerdetails',
+        loadChildren: () => import('../tracker-details/tracker-details-routing.module').then(m => m.TrackerDetailsPageRoutingModule)
       },
       {
         path: 'myfamily',
         loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+      },
+      {
+        path: 'myfamily/addfamilymember',
+        loadChildren: () => import('../add-family-member/add-family-member.module').then(m => m.AddFamilyMemberPageModule)
+      },
+      {
+        path: 'myfamily/:name/linkedtrackers',
+        loadChildren: () => import('../linked-trackers/linked-trackers.module').then(m => m.LinkedTrackersPageModule)
+      },
+      {
+        path: 'myfamily/:name/linkedtrackers/:trackerid/trackerdetails',
+        loadChildren: () => import('../tracker-details/tracker-details-routing.module').then(m => m.TrackerDetailsPageRoutingModule)
       },
       {
         path: 'notifications',
@@ -21,7 +37,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/app/trackers',
+        redirectTo: '/app/mytrackers',
         pathMatch: 'full'
       }
 
@@ -32,4 +48,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

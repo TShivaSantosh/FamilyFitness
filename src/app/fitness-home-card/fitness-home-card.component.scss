@@ -17,6 +17,12 @@
         margin-top: 5px;
     }
 
+    &__relationship-container {
+        display: flex;
+        flex-direction: row;
+        margin-top: 5px;
+    }
+
     &__image {
         margin-top: 10px;
         width: 40px;

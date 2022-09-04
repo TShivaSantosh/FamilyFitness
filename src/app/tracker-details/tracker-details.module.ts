@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FitnessDetailsPageRoutingModule } from './fitness-details-routing.module';
+import { TrackerDetailsPageRoutingModule } from './tracker-details-routing.module';
 
-import { FitnessDetailsPage } from './fitness-details.page';
+import { TrackerDetailsPage } from './tracker-details.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FitnessDetailsPageRoutingModule
+    TrackerDetailsPageRoutingModule
   ],
-  declarations: [FitnessDetailsPage]
+  declarations: [TrackerDetailsPage]
 })
-export class FitnessDetailsPageModule {}
+export class TrackerDetailsPageModule {}

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { LinkedTrackersComponent } from './linked-trackers.component';
+import { TrackerDetailsPage } from './tracker-details.page';
 
-describe('LinkedTrackersComponent', () => {
-  let component: LinkedTrackersComponent;
-  let fixture: ComponentFixture<LinkedTrackersComponent>;
+describe('TrackerDetailsPage', () => {
+  let component: TrackerDetailsPage;
+  let fixture: ComponentFixture<TrackerDetailsPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LinkedTrackersComponent ],
+      declarations: [ TrackerDetailsPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LinkedTrackersComponent);
+    fixture = TestBed.createComponent(TrackerDetailsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

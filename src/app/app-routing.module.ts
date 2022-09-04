@@ -16,8 +16,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'fitness-details',
-    loadChildren: () => import('./fitness-details/fitness-details.module').then( m => m.FitnessDetailsPageModule)
+    path: 'linked-trackers',
+    loadChildren: () => import('./linked-trackers/linked-trackers.module').then( m => m.LinkedTrackersPageModule)
   }
 ];
 @NgModule({
