@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ManageTrackers } from '../model/manage-trackers.model';
+import { ManageTrackersService } from '../services/manage-tracker.service';
 
 @Component({
   selector: 'app-manage-trackers',
@@ -9,13 +12,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ManageTrackersComponent implements OnInit {
 
   @Input() showHeader: boolean = false;
+  trackers$: Observable<ManageTrackers[]>;
 
-  constructor(private router: Router, private route:ActivatedRoute) { }
+  constructor(private router: Router,
+    private route:ActivatedRoute,
+    private manageTrackerService: ManageTrackersService
+    ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.trackers$ = this.manageTrackerService.manageTrackers();
+  }
 
-  goToTrackerDetails() {
-    this.router.navigate(['1/trackerdetails'], {relativeTo: this.route})
+  goToTrackerDetails(trackerId: number) {
+    this.router.navigate([`${trackerId}/trackerdetails`], {relativeTo: this.route})
   }
 
 }

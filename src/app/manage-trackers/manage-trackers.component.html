@@ -1,19 +1,21 @@
-<ion-list-header *ngIf="showHeader">
-  <ion-label>Manage Trackers</ion-label>
-  <ion-button color="secondary">
-    <ion-icon name="refresh-outline"></ion-icon>
-  </ion-button>
-</ion-list-header>
-<ion-card>
-  <ion-list>
-    <ion-item detail (click)="goToTrackerDetails()">
-      <ion-thumbnail slot="start">
-        <ion-img [src]="'assets/icon/applehealth.png'"></ion-img>
-      </ion-thumbnail>
-      <div>
-        <ion-label>Apple Health</ion-label>
-        <ion-label>Last Synced: 14-07-2022</ion-label>
-      </div>
-    </ion-item>
-  </ion-list>
-</ion-card>
+<ng-container *ngIf="trackers$ | async as trackers">
+  <ion-list-header *ngIf="showHeader">
+    <ion-label>Manage Trackers</ion-label>
+    <ion-button color="secondary">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </ion-button>
+  </ion-list-header>
+  <ion-card>
+    <ion-list>
+      <ion-item *ngFor="let tracker of trackers" detail (click)="goToTrackerDetails(tracker.trackerId)">
+        <ion-thumbnail slot="start">
+          <ion-img [src]="tracker.trackerId == 100 ? 'assets/icon/applehealth.png' : 'assets/icon/googlefit.png'"></ion-img>
+        </ion-thumbnail>
+        <div>
+          <ion-label>{{ tracker.trackerName }}</ion-label>
+          <ion-label>Last Synced: {{ tracker.updatedAt }}</ion-label>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ng-container>
