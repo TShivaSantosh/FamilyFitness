@@ -3,19 +3,38 @@
     <ion-title>Tracker Details</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
+<ion-content *ngIf="!isLoading" class="tracker-details">
   <ion-card>
     <ion-item>
       <ion-thumbnail slot="start">
         <ion-img [src]="'assets/icon/applehealth.png'"></ion-img>
       </ion-thumbnail>
-      <div>
-        <ion-label>Tracker Name:</ion-label>
+      <div class="tracker-details__header">
+        <ion-label class="tracker-details__header-title">Tracker Name</ion-label>
         <ion-label>Apple Health</ion-label>
       </div>
     </ion-item>
-    <ion-button shape="round" type="primary">Remove Tracker</ion-button>
+    <div>
+      <ion-segment mode="md" [value]="selectedTrackerDate"[scrollable]="true" class="tracker-details__segment">
+        <ion-segment-button [value]="trackerData.date" *ngFor="let trackerData of trackersData" (click)="selectedDay(trackerData)">
+          <ion-label> {{ trackerData.date }}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div class="tracker-details__tracker-content">
+        <div class="tracker-details__tracker-content-steps"> 
+          <ion-label class="tracker-details__tracker-content-label">Active</ion-label>
+          <ion-label>{{ selectedTrackerData.steps }} steps</ion-label>
+        </div>
+        <div class= "tracker-details__tracker-content-sleep">
+          <ion-label class="tracker-details__tracker-content-label">Sleep</ion-label>
+          <ion-label>{{ selectedTrackerData.sleepInSeconds }} minutes</ion-label>
+        </div>
+        <div class= "tracker-details__tracker-content-food">
+          <ion-label class="tracker-details__tracker-content-label">Food</ion-label>
+          <ion-label>{{ selectedTrackerData.food }} calories</ion-label>
+        </div>
+      </div>
   </ion-card>
-
+  <ion-button shape="round" type="primary">Remove Tracker</ion-button>
 </ion-content>

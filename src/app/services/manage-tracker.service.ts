@@ -26,7 +26,7 @@ export class ManageTrackersService {
               .get('http://localhost:8080/familyfitness/managetrackers',
                 {
                   headers: {
-                    "user_id": get(userObject, 'userId', 1)
+                    "user_id": get(userObject, 'userId', '1')
                   }
                 }
               )
@@ -42,7 +42,25 @@ export class ManageTrackersService {
         return from(this.httpClient.post(`http://localhost:8080/familyfitness/managetrackers/${trackerId}/trackerdata`,
           trackersData, {
           headers: {
-            "user_id": get(userObject, 'userId', 1)
+            "user_id": get(userObject, 'userId', '1')
+          }
+        }
+        ))
+      }),
+      tap((response) => console.log(response)),
+      catchError((error) => {
+        return of(null)
+      })
+    );
+  }
+
+  getTrackerData(trackerId: number) {
+    return this.userRegistrationService.userId$.pipe(
+      mergeMap((userObject: UserRegistration) => {
+        return from(this.httpClient.get(`http://localhost:8080/familyfitness/managetrackers/${trackerId}/trackerdata`,
+          {
+          headers: {
+            "user_id": get(userObject, 'userId', '1')
           }
         }
         ))
@@ -60,7 +78,7 @@ export class ManageTrackersService {
         return from(this.httpClient.post(`http://localhost:8080/familyfitness/linktracker`,
         trackerDetails, {
           headers: {
-            "user_id": get(userObject, 'userId', 1)
+            "user_id": get(userObject, 'userId', '1')
           }
         }
         ))

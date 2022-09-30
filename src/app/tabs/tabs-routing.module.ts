@@ -13,7 +13,7 @@ const routes: Routes = [
       },
       {
         path: 'mytrackers/:trackerid/trackerdetails',
-        loadChildren: () => import('../tracker-details/tracker-details-routing.module').then(m => m.TrackerDetailsPageRoutingModule)
+        loadChildren: () => import('../tracker-details/tracker-details.module').then(m => m.TrackerDetailsPageModule)
       },
       {
         path: 'myfamily',

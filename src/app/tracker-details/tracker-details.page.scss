@@ -1,0 +1,44 @@
+.tracker-details {
+    text-align: center;
+&__header {
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+}
+
+&__header-title {
+    margin-bottom: 10px;
+}
+
+&__segment {
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+&__tracker-content {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+&__tracker-content-steps{
+    font-size: large;
+}
+
+&__tracker-content-sleep{
+    font-size: large;
+    margin-top: 20px;
+}
+
+&__tracker-content-food{
+    font-size: large;
+    margin-top: 20px;
+}
+
+&__tracker-content-label {
+    margin-right: 20px;
+}
+
+}

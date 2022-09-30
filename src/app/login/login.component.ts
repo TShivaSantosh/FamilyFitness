@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       offline: true
     }))
       .pipe(catchError(() => of({
-        userId: 1,
+        userId: '1',
         imageUrl: '',
         displayName: 'shiva',
         refreshToken: '',
