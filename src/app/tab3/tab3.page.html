@@ -1,9 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tab3</ion-title>
+    <ion-title>Share Your Fitness Data</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ng-container *ngIf="!!notifications && !notifications.length">
+      <ion-label class="pending-notifications__no-pending-label">No Pending Requests</ion-label>
+    </ng-container>
+    <ion-list>
+      <ion-item *ngFor="let notification of notifications">
+        <div>
+          <ion-label class="ion-text-wrap">{{ notification.userName}} wants to add you as {{ notification.relationship }}</ion-label>
+          <div class="pending-notifications__buttons-container">
+            <ion-button shape="round" (click)="acceptRequest(notification.userId)">Accept</ion-button>
+            <ion-button shape="round" (click)="rejectRequest(notification.userId)">Reject</ion-button>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>

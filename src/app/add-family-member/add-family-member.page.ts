@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AddFamilyMemberService } from '../services/add-family-member.service';
 
 @Component({
   selector: 'app-add-family-member',
@@ -9,17 +10,25 @@ export class AddFamilyMemberPage implements OnInit {
 
   emailId;
   formdata;
+  value: string="father";
 
-  constructor() { }
+  constructor(private addFamilyMemberService: AddFamilyMemberService) { }
 
   ngOnInit() {
   }
 
-  onClickSubmit(data) {
-    this.emailId = data.emailId;
+
+  selectedRelationShip(event) {
+    this.value = event.detail.value;
   }
 
-  presentPicker() {
+  save() {
+    this.addFamilyMemberService
+    .requestTrackerDataAcess(this.emailId, this.value.toLowerCase())
+    .subscribe();
+  }
+
+  cancel() {
 
   }
 

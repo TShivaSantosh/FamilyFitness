@@ -16,7 +16,9 @@ export class UserRegistrationService {
   registerUser(userObject: UserRegistration): Observable<UserRegistration> {
     return this.http.post('http://localhost:8080/familyfitness/user/registration', {
       "userId": userObject.userId,
-      "emailId": userObject.email
+      "emailId": userObject.email,
+      "userName": userObject.displayName,
+      "imageUrl": userObject.imageUrl
     }, {observe: 'response'})
       .pipe(
         catchError(() => null),

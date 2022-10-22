@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button [routerLink]="'/app/myfamily'">
+      <ion-button [routerLink]="'/app/myfamily'" (click)="cancel()">
         Cancel
       </ion-button>
     </ion-buttons>
     <ion-title>Add Member</ion-title>
     <ion-buttons slot="end">
-      <ion-button [routerLink]="'/app/myfamily'">
+      <ion-button [routerLink]="'/app/myfamily'" (click)="save()">
         Done
       </ion-button>
     </ion-buttons>
@@ -23,7 +23,7 @@
       <ion-input type="email"></ion-input>
     </ion-item>
     <ion-list>
-      <ion-radio-group value="biff">
+      <ion-radio-group value="father" (ionChange)="selectedRelationShip($event)">
         <ion-list-header>
           <ion-label>Enter relationship witb member</ion-label>
         </ion-list-header>
