@@ -17,16 +17,17 @@ export class ManageTrackersService {
   constructor(private httpClient: HttpClient,
     private userRegistrationService: UserRegistrationService) { }
 
-  manageTrackers(): Observable<ManageTrackers[]> {
+  manageTrackers(userId?: string): Observable<ManageTrackers[]> {
     return this.userRegistrationService.userId$
       .pipe(
         mergeMap((userObject: UserRegistration) => {
+          const user_id =  userId || get(userObject, 'userId', '1')
           return from(
             this.httpClient
               .get('http://localhost:8080/familyfitness/managetrackers',
                 {
                   headers: {
-                    "user_id": get(userObject, 'userId', '1')
+                    user_id  
                   }
                 }
               )
@@ -54,13 +55,14 @@ export class ManageTrackersService {
     );
   }
 
-  getTrackerData(trackerId: number) {
+  getTrackerData(trackerId: number, userId?: string) {
     return this.userRegistrationService.userId$.pipe(
       mergeMap((userObject: UserRegistration) => {
+        const user_id = userId ?? get(userObject, 'userId', '1')
         return from(this.httpClient.get(`http://localhost:8080/familyfitness/managetrackers/${trackerId}/trackerdata`,
           {
           headers: {
-            "user_id": get(userObject, 'userId', '1')
+            user_id
           }
         }
         ))

@@ -1,25 +1,24 @@
-<ion-card>
+<ion-card *ngIf="familyMembers$ | async as familyMembers">
   <ion-item-group>
     <ion-item-divider>
-      <ion-label>Self</ion-label>
+      <ion-label>My Family Members</ion-label>
     </ion-item-divider>
-    <ion-item (click)="goToLinkedTrackers()" detail>
-      <app-fitness-home-card></app-fitness-home-card>
-    </ion-item>
-  </ion-item-group>
-
-  <ion-item-group>
-    <ion-item-divider>
-      <ion-label>My Family</ion-label>
-    </ion-item-divider>
-    <ion-item (click)="goToLinkedTrackers()" detail>
-      <app-fitness-home-card></app-fitness-home-card>
-    </ion-item>
-    <ion-item (click)="goToLinkedTrackers()" detail>
-      <app-fitness-home-card></app-fitness-home-card>
-    </ion-item>
-    <ion-item (click)="goToLinkedTrackers()" detail>
-      <app-fitness-home-card></app-fitness-home-card>
-    </ion-item>
+    <ng-container *ngIf="familyMembers.length">
+      <ng-container *ngFor="let familyMember of familyMembers;">
+        <ion-item (click)="goToLinkedTrackers(familyMember)" detail>
+          <app-fitness-home-card 
+          [dependantUrl]="familyMember.imageUrl"
+          [dependantName]="familyMember.userName"
+          [dependantRelationship]="familyMember.relationship">
+        </app-fitness-home-card>
+        </ion-item>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!familyMembers.length">
+      <ion-label class="fitness-home__error" text-wrap>At present there are no family members whose health data that you can access.
+        Get started by adding family member and request for health data access. Once approved you can
+        access their health data.
+      </ion-label>
+    </ng-container>
   </ion-item-group>
 </ion-card>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-linked-trackers',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LinkedTrackersPage implements OnInit {
 
-  constructor() { }
+  userId: string;
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.userId = this.activatedRoute.snapshot.paramMap.get('userId');
   }
 
 }

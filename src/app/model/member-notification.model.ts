@@ -3,4 +3,5 @@ export class MemberNotification {
     relationship: string;
     userName: string;
     userId: string;
+    imageUrl: string;
 }

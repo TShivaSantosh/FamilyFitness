@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { MemberNotification } from '../model/member-notification.model';
+import { AddFamilyMemberService } from '../services/add-family-member.service';
 
 @Component({
   selector: 'app-fitnesshome',
@@ -8,12 +12,22 @@ import { Router } from '@angular/router';
 })
 export class FitnessHomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  familyMembers$: Observable<MemberNotification[]>;
 
-  ngOnInit() {}
+  constructor(private router: Router, private addFamilyMemberService: AddFamilyMemberService) { }
 
-  goToLinkedTrackers() {
-    this.router.navigate(['app/myfamily/shiva/linkedtrackers'])
+  ngOnInit() {
+    this.familyMembers$ = this
+    .addFamilyMemberService
+    .getFamilyMembers()
+    .pipe(map((members: MemberNotification[]) => {
+      return members.filter((member) => member.status === 1)
+    }));
+
+  }
+
+  goToLinkedTrackers(member: MemberNotification) {
+    this.router.navigate([`app/myfamily/shiva/linkedtrackers/${member.userId}`])
   }
 
 }

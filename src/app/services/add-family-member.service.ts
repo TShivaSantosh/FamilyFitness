@@ -61,6 +61,19 @@ export class AddFamilyMemberService {
       }
       ))
   }
+
+  getFamilyMembers() {
+    return this.userRegistrationService.userId$
+    .pipe(
+      mergeMap((userObject: UserRegistration) => {
+        return from(this.httpClient.get(`http://localhost:8080/familyfitness/trackerdata/familymembers`, {
+          headers: {
+            "user_id": get(userObject, 'userId', '1')
+          }
+        })
+        )
+      })) as Observable<MemberNotification[]>
+  }
 }
 
 

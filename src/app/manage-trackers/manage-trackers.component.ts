@@ -13,6 +13,7 @@ export class ManageTrackersComponent implements OnInit {
 
   @Input() showHeader: boolean = false;
   trackers$: Observable<ManageTrackers[]>;
+  @Input() userId?: string;
 
   constructor(private router: Router,
     private route:ActivatedRoute,

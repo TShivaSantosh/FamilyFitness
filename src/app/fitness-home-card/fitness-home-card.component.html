@@ -1,14 +1,10 @@
 <div class="fitness-home-card__container">
-  <ion-icon name="person-outline" class="fitness-home-card__image"></ion-icon>
+  <ion-img [src]="dependantUrl" class="fitness-home-card__image"></ion-img>
   <div class="fitness-home-card__text-container">
-    <ion-label>Shiva Santosh T</ion-label>
-    <div class="fitness-home-card__age-container">
-      <ion-label>Age:</ion-label>
-      <ion-label>33</ion-label>
-    </div>
+    <ion-label>{{ dependantName }}</ion-label>
     <div class="fitness-home-card__relationship-container">
       <ion-label>Relationship:</ion-label>
-      <ion-label>Brother</ion-label>
+      <ion-label>{{ dependantRelationship }}</ion-label>
     </div>
   </div>
 </div>

@@ -22,7 +22,8 @@ export class TrackerDetailsPage implements OnInit {
 
   ngOnInit() {
    const trackerId = this.route.snapshot.paramMap.get('trackerid');
-   this.manageTrackerService.getTrackerData(+trackerId)
+   const userId = this.route.snapshot.paramMap.get('userid');
+   this.manageTrackerService.getTrackerData(+trackerId, userId)
    .pipe(
      map((trackersData: TrackerData[]) => {
     trackersData.forEach(trackerData => {

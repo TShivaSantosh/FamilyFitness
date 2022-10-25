@@ -24,11 +24,11 @@ const routes: Routes = [
         loadChildren: () => import('../add-family-member/add-family-member.module').then(m => m.AddFamilyMemberPageModule)
       },
       {
-        path: 'myfamily/:name/linkedtrackers',
+        path: 'myfamily/:name/linkedtrackers/:userid',
         loadChildren: () => import('../linked-trackers/linked-trackers.module').then(m => m.LinkedTrackersPageModule)
       },
       {
-        path: 'myfamily/:name/linkedtrackers/:trackerid/trackerdetails',
+        path: 'myfamily/:name/linkedtrackers/:userid/:trackerid/trackerdetails',
         loadChildren: () => import('../tracker-details/tracker-details-routing.module').then(m => m.TrackerDetailsPageRoutingModule)
       },
       {
