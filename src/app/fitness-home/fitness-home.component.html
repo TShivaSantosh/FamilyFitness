@@ -1,8 +1,5 @@
-<ion-card *ngIf="familyMembers$ | async as familyMembers">
+<ion-card *ngIf="familyMembers">
   <ion-item-group>
-    <ion-item-divider>
-      <ion-label>My Family Members</ion-label>
-    </ion-item-divider>
     <ng-container *ngIf="familyMembers.length">
       <ng-container *ngFor="let familyMember of familyMembers;">
         <ion-item (click)="goToLinkedTrackers(familyMember)" detail>

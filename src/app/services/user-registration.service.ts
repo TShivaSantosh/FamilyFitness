@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { AppSettings } from '../app.settings';
 import { UserRegistration } from '../model/user-registration.model';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class UserRegistrationService {
   constructor(private http: HttpClient) { }
 
   registerUser(userObject: UserRegistration): Observable<UserRegistration> {
-    return this.http.post('http://localhost:8080/familyfitness/user/registration', {
+    return this.http.post(`${AppSettings.localhost}/familyfitness/user/registration`, {
       "userId": userObject.userId,
       "emailId": userObject.email,
       "userName": userObject.displayName,

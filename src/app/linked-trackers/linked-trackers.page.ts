@@ -12,7 +12,7 @@ export class LinkedTrackersPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.userId = this.activatedRoute.snapshot.paramMap.get('userId');
+    this.userId = this.activatedRoute.snapshot.paramMap.get('userid');
   }
 
 }

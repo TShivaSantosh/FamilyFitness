@@ -44,13 +44,12 @@ export class AvailableTrackersComponent implements OnInit {
       bucket: 'day'
     });
     console.log('food data' + JSON.stringify(nutritionData));
-    const sleepData = await this.health.queryAggregated({
+    /*const sleepData = await this.health.query({
       startDate: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
       endDate: new Date(),
-      dataType: 'activity',
-      bucket: 'day'
+      dataType: 'activity'
     });
-    console.log('sleep data' + JSON.stringify(sleepData));
+    console.log('sleep data' + JSON.stringify(sleepData));*/
     const payload: Map<string, TrackerData> = new Map<string, TrackerData>();
     stepData.forEach((step: any , key) => {
       const date = moment(step['startDate']).format('DD-MM-YYYY');

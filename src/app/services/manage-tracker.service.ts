@@ -8,6 +8,7 @@ import { UserRegistrationService } from './user-registration.service';
 import { get } from 'lodash';
 import { TrackerData } from '../model/tracker-data.model';
 import { AvailableTrackers } from '../model/available-trackers.model';
+import { AppSettings } from '../app.settings';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class ManageTrackersService {
           const user_id =  userId || get(userObject, 'userId', '1')
           return from(
             this.httpClient
-              .get('http://localhost:8080/familyfitness/managetrackers',
+              .get(`${AppSettings.localhost}/familyfitness/managetrackers`,
                 {
                   headers: {
                     user_id  
@@ -40,7 +41,7 @@ export class ManageTrackersService {
   submitTrackerData(trackersData: TrackerData[], trackerId: number) {
     return this.userRegistrationService.userId$.pipe(
       mergeMap((userObject: UserRegistration) => {
-        return from(this.httpClient.post(`http://localhost:8080/familyfitness/managetrackers/${trackerId}/trackerdata`,
+        return from(this.httpClient.post(`${AppSettings.localhost}/familyfitness/managetrackers/${trackerId}/trackerdata`,
           trackersData, {
           headers: {
             "user_id": get(userObject, 'userId', '1')
@@ -59,7 +60,7 @@ export class ManageTrackersService {
     return this.userRegistrationService.userId$.pipe(
       mergeMap((userObject: UserRegistration) => {
         const user_id = userId ?? get(userObject, 'userId', '1')
-        return from(this.httpClient.get(`http://localhost:8080/familyfitness/managetrackers/${trackerId}/trackerdata`,
+        return from(this.httpClient.get(`${AppSettings.localhost}/familyfitness/managetrackers/${trackerId}/trackerdata`,
           {
           headers: {
             user_id
@@ -77,7 +78,7 @@ export class ManageTrackersService {
   linkTracker(trackerDetails: AvailableTrackers) {
     return this.userRegistrationService.userId$.pipe(
       mergeMap((userObject: UserRegistration) => {
-        return from(this.httpClient.post(`http://localhost:8080/familyfitness/linktracker`,
+        return from(this.httpClient.post(`${AppSettings.localhost}/familyfitness/linktracker`,
         trackerDetails, {
           headers: {
             "user_id": get(userObject, 'userId', '1')

@@ -7,11 +7,11 @@
   <ion-card>
     <ion-item>
       <ion-thumbnail slot="start">
-        <ion-img [src]="'assets/icon/applehealth.png'"></ion-img>
+        <ion-img [src]="tracker.trackerId == 100 ? 'assets/icon/applehealth.png' : 'assets/icon/googlefit.png'"></ion-img>
       </ion-thumbnail>
       <div class="tracker-details__header">
         <ion-label class="tracker-details__header-title">Tracker Name</ion-label>
-        <ion-label>Apple Health</ion-label>
+        <ion-label>{{ tracker.trackerName}}</ion-label>
       </div>
     </ion-item>
     <div>

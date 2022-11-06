@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,18 +12,30 @@ import { AddFamilyMemberService } from '../services/add-family-member.service';
 })
 export class FitnessHomeComponent implements OnInit {
 
-  familyMembers$: Observable<MemberNotification[]>;
-
-  constructor(private router: Router, private addFamilyMemberService: AddFamilyMemberService) { }
+  familyMembers: MemberNotification[]
+  constructor(private router: Router, 
+    private addFamilyMemberService: AddFamilyMemberService,
+    private cd: ChangeDetectorRef
+    ) { }
 
   ngOnInit() {
-    this.familyMembers$ = this
+    this.getFamilyMembers();
+    this.addFamilyMemberService.refreshFamilyMembers$
+    .subscribe(() => {
+      this.getFamilyMembers();
+      this.cd.markForCheck();
+    })
+  }
+
+  getFamilyMembers() {
+    this
     .addFamilyMemberService
     .getFamilyMembers()
     .pipe(map((members: MemberNotification[]) => {
       return members.filter((member) => member.status === 1)
-    }));
-
+    })).subscribe((data) => {
+      this.familyMembers = data;
+    });
   }
 
   goToLinkedTrackers(member: MemberNotification) {

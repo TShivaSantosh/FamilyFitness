@@ -21,7 +21,7 @@ export class ManageTrackersComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.trackers$ = this.manageTrackerService.manageTrackers();
+    this.trackers$ = this.manageTrackerService.manageTrackers(this.userId);
   }
 
   goToTrackerDetails(trackerId: number) {

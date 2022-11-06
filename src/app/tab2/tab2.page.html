@@ -1,4 +1,10 @@
 <ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-button color="secondary" (click)="getFamilyMembers()">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>Family Members</ion-title>
   <ion-buttons slot="end">
       <ion-button [routerLink]="'addfamilymember'">
         <ion-icon slot="end" name="add-outline"></ion-icon>
