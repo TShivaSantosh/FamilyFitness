@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
-import { forkJoin } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { AvailableTrackers } from '../model/available-trackers.model';
 import { TrackerData } from '../model/tracker-data.model';
@@ -19,7 +18,9 @@ export class TrackerDetailsPage implements OnInit {
   trackersData: TrackerData[];
   isLoading = true;
   selectedTrackerData: TrackerData;
-  selectedTrackerDate: String;
+  selectedTrackerDate: string;
+  userId: string;
+
   constructor(private route: ActivatedRoute,
     private manageTrackerService: ManageTrackersService,
     private availableTrackerService: AvailableTrackersService,
@@ -27,7 +28,7 @@ export class TrackerDetailsPage implements OnInit {
 
   ngOnInit() {
     const trackerId = this.route.snapshot.paramMap.get('trackerid');
-    const userId = this.route.snapshot.paramMap.get('userid');
+    this.userId = this.route.snapshot.paramMap.get('userid');
     this.availableTrackerService
       .availableTrackers()
       .subscribe((data) => {
@@ -37,7 +38,7 @@ export class TrackerDetailsPage implements OnInit {
         }
         this.cd.markForCheck();
       });
-   this.manageTrackerService.getTrackerData(+trackerId, userId)
+   this.manageTrackerService.getTrackerData(+trackerId, this.userId)
    .pipe(
      map((trackersData) => {
     trackersData.forEach(trackerData => {
@@ -66,6 +67,16 @@ export class TrackerDetailsPage implements OnInit {
     this.selectedTrackerData = trackerData;
     this.selectedTrackerDate = trackerData.date;
     this.cd.detectChanges();
+  }
+
+  unlinkTracker() {
+    this.manageTrackerService.unlinkTracker(this.tracker.trackerId, this.userId)
+    .subscribe(() => {
+      this.manageTrackerService.refreshManageTrackers$.next(true);
+      window.history.back();
+    });
+    
+
   }
 
 

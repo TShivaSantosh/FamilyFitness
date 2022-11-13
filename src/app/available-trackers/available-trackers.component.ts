@@ -8,7 +8,7 @@ import { ManageTrackersService } from '../services/manage-tracker.service';
 import { get } from 'lodash' 
 import * as moment from 'moment';
 import { Key } from 'protractor';
-import { mergeMap } from 'rxjs/operators';
+import { finalize, mergeMap, take } from 'rxjs/operators';
 @Component({
   selector: 'app-available-trackers',
   templateUrl: './available-trackers.component.html',
@@ -73,9 +73,13 @@ export class AvailableTrackersComponent implements OnInit {
     this.manageTrackerService.linkTracker(tracker)
     .pipe(mergeMap(() => {
       return this.manageTrackerService.submitTrackerData(payloadArray, tracker.trackerId)
+    }),
+    take(1),
+    finalize(() => {
+      this.manageTrackerService.refreshManageTrackers$.next(true);
     }))
     .subscribe((resp) =>{
-      console.log('---success---')
+      console.log('---success---');
     })
     
   }

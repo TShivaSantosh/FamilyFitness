@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'linked-trackers',
     loadChildren: () => import('./linked-trackers/linked-trackers.module').then( m => m.LinkedTrackersPageModule)
+  },
+  {
+    path: 'family-fitness-summary',
+    loadChildren: () => import('./family-fitness-summary/family-fitness-summary.module').then( m => m.FamilyFitnessSummaryPageModule)
   }
 ];
 @NgModule({

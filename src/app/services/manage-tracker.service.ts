@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { from, Observable, of, Subject } from 'rxjs';
+import { catchError, map, mergeMap, take, tap } from 'rxjs/operators';
 import { ManageTrackers } from '../model/manage-trackers.model';
 import { UserRegistration } from '../model/user-registration.model';
 import { UserRegistrationService } from './user-registration.service';
@@ -14,6 +14,8 @@ import { AppSettings } from '../app.settings';
   providedIn: 'root'
 })
 export class ManageTrackersService {
+
+  refreshManageTrackers$ = new Subject<Boolean>();
 
   constructor(private httpClient: HttpClient,
     private userRegistrationService: UserRegistrationService) { }
@@ -34,7 +36,8 @@ export class ManageTrackersService {
               )
           )
         }),
-        map((resp) => resp['trackers'])
+        map((resp) => resp['trackers']),
+        take(1)
       ) as Observable<ManageTrackers[]>; 
   }
 
@@ -69,6 +72,7 @@ export class ManageTrackersService {
         ))
       }),
       tap((response) => console.log(response)),
+      take(1),
       catchError((error) => {
         return of(null)
       })
@@ -91,4 +95,20 @@ export class ManageTrackersService {
       }))
   }
 
+  unlinkTracker(trackerId: number, userId?: string) {
+    return this.userRegistrationService.userId$.pipe(
+      mergeMap((userObject: UserRegistration) => {
+        const user_id = userId ?? get(userObject, 'userId', '1')
+        return from(this.httpClient.post(`${AppSettings.localhost}/familyfitness/${trackerId}/unlink`,
+        null, {
+          headers: {
+            "user_id": user_id
+          }
+        }
+        ))
+      }),
+      catchError((error) => {
+        return of(null)
+      }))
+  }
 }
