@@ -1,12 +1,13 @@
 
-import { Component, OnInit } from '@angular/core';
-import { forkJoin, of } from 'rxjs';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { forkJoin, of, zip } from 'rxjs';
 import { finalize, map, mergeMap, take, tap, zipAll } from 'rxjs/operators';
 import { ManageTrackers } from '../model/manage-trackers.model';
 import { MemberNotification } from '../model/member-notification.model';
 import { TrackerData } from '../model/tracker-data.model';
 import { AddFamilyMemberService } from '../services/add-family-member.service';
 import { ManageTrackersService } from '../services/manage-tracker.service';
+import { UserRegistrationService } from '../services/user-registration.service';
 
 @Component({
   selector: 'app-family-fitness-summary',
@@ -20,15 +21,45 @@ export class FamilyFitnessSummaryPage implements OnInit {
   membersTrackers = []
   membersTrackersData = []
   aggregateMembersStepsData = {}
-
+  public chart: any;
+  chartData = []
+  chartOptions = {
+    responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
+  }
+  labels =  ['This Week Steps Summary'];
+  chartReady = false
+  colors = ['red', 'green', 'blue', 'yellow', 'purple', 'violet', 'orange'];
   constructor(private addFamilyMemberService: AddFamilyMemberService,
-    private manageTrackerService: ManageTrackersService) { }
+    private manageTrackerService: ManageTrackersService,
+    private userRegistrationService: UserRegistrationService,
+    private cd: ChangeDetectorRef) {
+
+     }
 
   ngOnInit() {
+
     this.addFamilyMemberService.getFamilyMembers()
       .pipe(
         map((members: MemberNotification[]) => {
           return members.filter((member) => member.status === 1)
+        }),
+        mergeMap((members: MemberNotification[]) => {
+          return zip(this.userRegistrationService.userId$, of(members))
+        }),
+        map(([user, members]) => {
+          const userMember = {
+            status: 1,
+            relationship: 'self',
+            userName: user.displayName,
+            userId: user.userId,
+            imageUrl: user.imageUrl
+          }
+          const modifiedMembers =  []
+          members.forEach(element => {
+            modifiedMembers.push(element)
+          });
+          modifiedMembers.push(userMember)
+          return modifiedMembers
         }),
         mergeMap((members: MemberNotification[]) => {
           this.members = members;
@@ -82,6 +113,24 @@ export class FamilyFitnessSummaryPage implements OnInit {
       this.aggregateMembersStepsData[`${member.userName}`] = steps 
     }
     console.log('aggregated steps'+ JSON.stringify(this.aggregateMembersStepsData))
+    this.createChart()
+  }
+
+  createChart(){
+    const members = Object.keys(this.aggregateMembersStepsData) 
+    const data = Object.values(this.aggregateMembersStepsData)
+    const dataSet = [];
+    for (let i = 0; i < this.members.length; i++) {
+      const name = members[i]
+      const value = data[i]
+      dataSet.push({
+        label: `${name}`,
+        data: [value]
+      })
+    }
+    this.chartData = dataSet
+    this.chartReady = true
+    this.cd.detectChanges()
   }
 
 }

@@ -5,5 +5,16 @@
 </ion-header>
 
 <ion-content>
+  <div class="chart-container" *ngIf="chartReady">
+    <canvas
+    baseChart
+    [type]="'bar'"
+    [datasets]="chartData"
+    [labels]="labels"
+    [options]="chartOptions"
+    [legend]="true"
+    >
+</canvas>
+  </div>
 
 </ion-content>

@@ -10,6 +10,7 @@ import { Health } from '@awesome-cordova-plugins/health/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,8 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgChartsModule
     ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
