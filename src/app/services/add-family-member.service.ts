@@ -16,13 +16,13 @@ export class AddFamilyMemberService {
 
   constructor(private userRegistrationService: UserRegistrationService, private httpClient: HttpClient) { }
 
-  requestTrackerDataAcess(gmaiLId: string, relationship: string) {
+  requestTrackerDataAcess(gmailId: string, relationship: string) {
     return this.userRegistrationService.userId$
       .pipe(
         mergeMap((userObject: UserRegistration) => {
           return from(this.httpClient.post(`${AppSettings.localhost}/familyfitness/trackerdata/request`, {
-            "dependantEmail": "shivasantosh01@gmail.com",
-            "relationship": "Brother"
+            "dependantEmail": gmailId,
+            "relationship": relationship
           }, {
             observe: 'response',
             headers: {

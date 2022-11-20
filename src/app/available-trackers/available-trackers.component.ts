@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Health } from '@awesome-cordova-plugins/health/ngx';
-import { Observable } from 'rxjs';
+import { from, Observable, zip } from 'rxjs';
 import { AvailableTrackers } from '../model/available-trackers.model';
 import { TrackerData } from '../model/tracker-data.model';
 import { AvailableTrackersService } from '../services/available-trackers.service';
 import { ManageTrackersService } from '../services/manage-tracker.service';
-import { get } from 'lodash' 
 import * as moment from 'moment';
-import { Key } from 'protractor';
-import { finalize, mergeMap, take } from 'rxjs/operators';
+import { finalize, map, mergeMap, take } from 'rxjs/operators';
+import { Device } from '@capacitor/device';
 @Component({
   selector: 'app-available-trackers',
   templateUrl: './available-trackers.component.html',
@@ -25,7 +24,20 @@ export class AvailableTrackersComponent implements OnInit {
 
   async ngOnInit() {
     //this.isAppleHealthAvailable = await this.health.isAvailable();
-    this.trackers$ = this.availableTrackersService.availableTrackers();
+    this.trackers$ = zip(this.availableTrackersService.availableTrackers(), from(Device.getInfo()))
+    .pipe(
+    map(([availableTrackers, device]) => {
+
+      return availableTrackers.filter((tracker) => {
+        if(device.platform == 'ios' && tracker.trackerId == 100) {
+          return true
+        } else if (device.platform == 'android' && tracker.trackerId == 101) {
+          return true
+        } else {
+          return false
+        }
+      })
+    }));
   }
 
   async linkAppleHealth(tracker: AvailableTrackers) {

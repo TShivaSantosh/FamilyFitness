@@ -44,4 +44,8 @@ export class ManageTrackersComponent implements OnInit {
     });
   }
 
+  refreshTrackers() {
+    
+  }
+
 }

@@ -20,7 +20,7 @@
       <ion-label>Enter email address of member</ion-label>
     </ion-item>
     <ion-item>
-      <ion-input type="email"></ion-input>
+      <ion-input type="email" [(ngModel)]="emailId"></ion-input>
     </ion-item>
     <ion-list>
       <ion-radio-group value="father" (ionChange)="selectedRelationShip($event)">
@@ -50,6 +50,14 @@
         <ion-item>
           <ion-label>Friend</ion-label>
           <ion-radio slot="start" value="friend"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Husband</ion-label>
+          <ion-radio slot="start" value="husband"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Wife</ion-label>
+          <ion-radio slot="start" value="wife"></ion-radio>
         </ion-item>
         <ion-item>
           <ion-label>Other</ion-label>

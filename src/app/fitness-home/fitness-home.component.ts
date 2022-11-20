@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MemberNotification } from '../model/member-notification.model';
 import { AddFamilyMemberService } from '../services/add-family-member.service';

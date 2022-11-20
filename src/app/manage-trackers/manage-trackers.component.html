@@ -1,7 +1,7 @@
 <ng-container *ngIf="trackers">
   <ion-list-header *ngIf="showHeader">
     <ion-label>Manage Trackers</ion-label>
-    <ion-button color="secondary">
+    <ion-button color="secondary" (click)="refreshTrackers()">
       <ion-icon name="refresh-outline"></ion-icon>
     </ion-button>
   </ion-list-header>
