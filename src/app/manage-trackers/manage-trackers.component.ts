@@ -45,7 +45,7 @@ export class ManageTrackersComponent implements OnInit {
   }
 
   refreshTrackers() {
-    
+    this.manageTrackerService.refreshAvailableTrackersData$.next(true);
   }
 
 }

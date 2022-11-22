@@ -25,7 +25,9 @@ export class AddFamilyMemberPage implements OnInit {
   save() {
     this.addFamilyMemberService
     .requestTrackerDataAcess(this.emailId, this.value.toLowerCase())
-    .subscribe();
+    .subscribe(() => {
+      
+    });
   }
 
   cancel() {

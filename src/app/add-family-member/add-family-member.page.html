@@ -5,7 +5,7 @@
         Cancel
       </ion-button>
     </ion-buttons>
-    <ion-title>Add Member</ion-title>
+    <ion-title>Add Family Member</ion-title>
     <ion-buttons slot="end">
       <ion-button [routerLink]="'/app/myfamily'" (click)="save()">
         Done
@@ -23,9 +23,9 @@
       <ion-input type="email" [(ngModel)]="emailId"></ion-input>
     </ion-item>
     <ion-list>
-      <ion-radio-group value="father" (ionChange)="selectedRelationShip($event)">
+      <ion-radio-group (ionChange)="selectedRelationShip($event)">
         <ion-list-header>
-          <ion-label>Enter relationship witb member</ion-label>
+          <ion-label>Select relationship with member</ion-label>
         </ion-list-header>
         <ion-item>
           <ion-label>Father</ion-label>

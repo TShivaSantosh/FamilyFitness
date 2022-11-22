@@ -149,7 +149,8 @@
     "schematicCollections": [
       "@ionic/angular-toolkit"
     ],
-    "analytics": false
+    "analytics": false,
+    "scripts": ["../node_modules/chart.js/dist/Chart.min.js"]
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {

@@ -33,54 +33,59 @@ export class FamilyFitnessSummaryPage implements OnInit {
     private manageTrackerService: ManageTrackersService,
     private userRegistrationService: UserRegistrationService,
     private cd: ChangeDetectorRef) {
-
      }
 
   ngOnInit() {
+    this.fetchFamilyMembers();
+  }
 
+  fetchFamilyMembers() {
+    this.noOfFamilyMembers = 0;
+    this.members = []
+    this.membersTrackers = []
+    this.membersTrackersData = []
+    this.aggregateMembersStepsData = {}
+    this.chartData = []
     this.addFamilyMemberService.getFamilyMembers()
-      .pipe(
-        map((members: MemberNotification[]) => {
-          return members.filter((member) => member.status === 1)
-        }),
-        mergeMap((members: MemberNotification[]) => {
-          return zip(this.userRegistrationService.userId$, of(members))
-        }),
-        map(([user, members]) => {
-          const userMember = {
-            status: 1,
-            relationship: 'self',
-            userName: user.displayName,
-            userId: user.userId,
-            imageUrl: user.imageUrl
-          }
-          const modifiedMembers =  []
-          members.forEach(element => {
-            modifiedMembers.push(element)
-          });
-          modifiedMembers.push(userMember)
-          return modifiedMembers
-        }),
-        mergeMap((members: MemberNotification[]) => {
-          this.members = members;
-          this.noOfFamilyMembers = members.length;
-          if (this.noOfFamilyMembers) {
-            const arrayOfMemberTrackers = [];
-            for (let i = 0; i < this.noOfFamilyMembers; i++) {
-              const member = members[i];
-              arrayOfMemberTrackers.push(this.manageTrackerService.manageTrackers(member.userId))
-            }
-            return forkJoin(arrayOfMemberTrackers)
-          } 
-          return of([])
-        }),
-        finalize(() => {
-          this.fetchMembersTrackersData();
-        }),
-        take(1)
-        ).subscribe((data: any[]) => {
-          this.membersTrackers = data;
+    .pipe(
+      map((members: MemberNotification[]) => {
+        return members.filter((member) => member.status === 1)
+      }),
+      mergeMap((members: MemberNotification[]) => {
+        return zip(this.userRegistrationService.userId$, of(members))
+      }),
+      map(([user, members]) => {
+        const userMember = {
+          status: 1,
+          relationship: 'self',
+          userName: user.displayName,
+          userId: user.userId,
+          imageUrl: user.imageUrl
+        }
+        const modifiedMembers =  []
+        members.forEach(element => {
+          modifiedMembers.push(element)
         });
+        modifiedMembers.push(userMember)
+        return modifiedMembers
+      }),
+      mergeMap((members: MemberNotification[]) => {
+        this.members = members;
+        this.noOfFamilyMembers = members.length;
+        if (this.noOfFamilyMembers) {
+          const arrayOfMemberTrackers = [];
+          for (let i = 0; i < this.noOfFamilyMembers; i++) {
+            const member = members[i];
+            arrayOfMemberTrackers.push(this.manageTrackerService.manageTrackers(member.userId))
+          }
+          return forkJoin(arrayOfMemberTrackers)
+        } 
+        return of([])
+      })
+      ).subscribe((data: any[]) => {
+        this.membersTrackers = data;
+        this.fetchMembersTrackersData();
+      });
   }
 
   async fetchMembersTrackersData() {    
@@ -131,6 +136,10 @@ export class FamilyFitnessSummaryPage implements OnInit {
     this.chartData = dataSet
     this.chartReady = true
     this.cd.detectChanges()
+  }
+
+  refreshFitnessReport() {
+    this.fetchFamilyMembers();
   }
 
 }

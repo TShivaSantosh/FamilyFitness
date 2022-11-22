@@ -16,6 +16,7 @@ import { AppSettings } from '../app.settings';
 export class ManageTrackersService {
 
   refreshManageTrackers$ = new Subject<Boolean>();
+  refreshAvailableTrackersData$ = new Subject<Boolean>();
 
   constructor(private httpClient: HttpClient,
     private userRegistrationService: UserRegistrationService) { }

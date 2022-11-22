@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { finalize, map, mergeMap } from 'rxjs/operators';
+import { finalize, map, mergeMap, take } from 'rxjs/operators';
 import { MemberNotification } from '../model/member-notification.model';
 import { AddFamilyMemberService } from '../services/add-family-member.service';
 
@@ -32,14 +32,18 @@ export class Tab3Page implements OnInit {
 
   acceptRequest(depedantId: string) {
     this.addFamilyMemberService.acceptRequest(1, depedantId)
-      .pipe(finalize(() => {
+      .pipe(
+        take(1),
+        finalize(() => {
         return this.fetchNotifications()
       })).subscribe();
   }
 
   rejectRequest(depedantId: string) {
     this.addFamilyMemberService.acceptRequest(0, depedantId)
-      .pipe(finalize(() => {
+      .pipe(
+        take(1),
+        finalize(() => {
         return this.fetchNotifications()
       })).subscribe();
   }

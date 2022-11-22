@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AddFamilyMemberService } from '../services/add-family-member.service';
 
 @Component({
   selector: 'app-tab4',
@@ -8,8 +9,10 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 export class Tab4Page implements OnInit {
 
 
-  constructor() { }
+  constructor(private addFamilyMembersService: AddFamilyMemberService) { }
 
   ngOnInit() {
+
   }
+
 }
