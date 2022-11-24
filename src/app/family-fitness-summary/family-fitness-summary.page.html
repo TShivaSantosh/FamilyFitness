@@ -10,16 +10,23 @@
 </ion-header>
 
 <ion-content>
-  <div class="chart-container" *ngIf="chartReady">
-    <canvas
-    baseChart
-    [type]="'bar'"
-    [datasets]="chartData"
-    [labels]="labels"
-    [options]="chartOptions"
-    [legend]="true"
-    >
-</canvas>
-  </div>
+  <ion-card>
+    <ion-card-header>
+      Each family member should try reaching <strong>56000</strong> steps this week. 
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container" *ngIf="chartReady">
+        <canvas
+        baseChart
+        [type]="'bar'"
+        [datasets]="chartData"
+        [labels]="labels"
+        [options]="chartOptions"
+        [legend]="true"
+        ></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
 
 </ion-content>

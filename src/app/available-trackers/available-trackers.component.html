@@ -1,15 +1,14 @@
-<div>
+<div class="available-trackers">
   <ion-list-header>
     <ion-label>Available Trackers</ion-label>
   </ion-list-header>
-  <ion-card>
-    <ion-list>
-      <ion-item *ngFor="let tracker of trackers$ | async;" (click)="linkAppleHealth(tracker)">
-        <ion-thumbnail slot="start">
-          <ion-img [src]="tracker.trackerId == 100 ? 'assets/icon/applehealth.png' : 'assets/icon/googlefit.png'"></ion-img>
-        </ion-thumbnail>
-        <ion-label>{{ tracker.trackerName }}</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-card>
+  <ion-list>
+    <ion-item *ngFor="let tracker of trackers$ | async;" (click)="linkAppleHealth(tracker)">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="tracker.trackerId == 100 ? 'assets/icon/applehealth.png' : 'assets/icon/googlefit.png'">
+        </ion-img>
+      </ion-thumbnail>
+      <ion-label class="available-trackers__title">{{ tracker.trackerName }}</ion-label>
+    </ion-item>
+  </ion-list>
 </div>

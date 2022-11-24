@@ -9,12 +9,12 @@
 <ion-content *ngIf="!isLoading" class="tracker-details">
   <ion-card>
     <ion-item>
-      <ion-thumbnail slot="start">
+      <ion-thumbnail slot="start" class="tracker-details__header">
         <ion-img [src]="tracker.trackerId == 100 ? 'assets/icon/applehealth.png' : 'assets/icon/googlefit.png'"></ion-img>
       </ion-thumbnail>
-      <div class="tracker-details__header">
+      <div class="tracker-details__header-title-container">
         <ion-label class="tracker-details__header-title">Tracker Name</ion-label>
-        <ion-label>{{ tracker.trackerName}}</ion-label>
+        <ion-label class="tracker-details__header-sub-title">{{ tracker.trackerName}}</ion-label>
       </div>
     </ion-item>
     <div>
@@ -26,15 +26,15 @@
     </div>
     <div class="tracker-details__tracker-content">
         <div class="tracker-details__tracker-content-steps"> 
-          <ion-label class="tracker-details__tracker-content-label">Active</ion-label>
+          <ion-label class="tracker-details__tracker-content-label"><strong>Active</strong></ion-label>
           <ion-label>{{ selectedTrackerData.steps }} steps</ion-label>
         </div>
         <div class= "tracker-details__tracker-content-sleep">
-          <ion-label class="tracker-details__tracker-content-label">Sleep</ion-label>
+          <ion-label class="tracker-details__tracker-content-label"><strong>Sleep</strong></ion-label>
           <ion-label>{{ selectedTrackerData.sleepInSeconds }} minutes</ion-label>
         </div>
         <div class= "tracker-details__tracker-content-food">
-          <ion-label class="tracker-details__tracker-content-label">Food</ion-label>
+          <ion-label class="tracker-details__tracker-content-label"><strong>Food</strong></ion-label>
           <ion-label>{{ selectedTrackerData.food }} calories</ion-label>
         </div>
       </div>

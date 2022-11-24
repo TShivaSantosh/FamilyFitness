@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       offline: true
     }))
       .pipe(catchError(() => of({
-        userId: '1',
+        userId: '109454486174688318544',
         imageUrl: '',
         displayName: 'shiva',
         refreshToken: '',
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         givenName: 'shiva',
         idToken: '',
         familyName: 'shiva',
-        email: 'shiva@gmail.com'
+        email: 'stangirala@castlighthealth.com'
       })),
         mergeMap((resp) => {
           console.log('--login response'+JSON.stringify(resp))
